@@ -1,13 +1,20 @@
+//package EmpManagement;
+
 public class Employee {
     private int id;
     private String name;
     private String homeTown;
     private int salary;
 
-    public Employee(String name, String position, int salary) {
+    public Employee(int id, String name, String homeTown, int salary) {
+        this.id = id;
         this.name = name;
-        this.homeTown = position;
+        this.homeTown = homeTown;
         this.salary = salary;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {

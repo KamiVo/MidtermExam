@@ -1,44 +1,122 @@
+//package EmpManagement;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Manage {
-    private List<Employee> list = new ArrayList<>();
-
-    Scanner sc = new Scanner(System.in);
+    private List<Employee> listEmployee = new ArrayList<>();
+    private Scanner sc = new Scanner(System.in);
 
     public void showAllEmployees() {
-        System.out.println("Show all Employees");
-        for (Employee employee : list) {
-            System.out.println("Name: " + employee.getName());
-            System.out.println("homeTown: " + employee.getHomeTown());
-            System.out.println("Salary: " + employee.getSalary());
+        if (listEmployee.isEmpty()) {
+            System.out.println("No employees to display.");
+            return;
+        }
+
+        // in ra danh sách nhân viên
+        System.out.printf("%-10s %-20s %-20s %-10s%n", "ID", "Name", "Hometown", "Salary");
+        System.out.println("---------------------------------------------------------------");
+
+        // in ra thông tin từng nhân viên
+        for (Employee emp : listEmployee) {
+            System.out.printf("%-10d %-20s %-20s %-10d%n", emp.getId(), emp.getName(), emp.getHomeTown(), emp.getSalary());
         }
     }
 
-    public void addNewEmp() {
-        try{
-            System.out.println("Enter number of employee: ");
-            int n = sc.nextInt();sc.nextLine();
-            for (int i = 0; i < n; i++) {
-                System.out.println("Enter employee's id: ");
-                int id = sc.nextInt();sc.nextLine();
-                System.out.println("Enter employee's name: ");
+    public void addNewEmployee() { // thêm nhân viên mới
+        try {
+            System.out.println("Enter the number of employees you want to add: "); // nhập số lượng nhân viên cần thêm
+            int amount = sc.nextInt();
+            sc.nextLine();
+            for (int i = 0; i < amount; i++) {
+                System.out.print("Enter employee's ID: ");
+                int id = sc.nextInt();
+                sc.nextLine();
+                System.out.print("Enter employee's name: ");
                 String name = sc.nextLine();
-                System.out.println("Enter employee's home town: ");
+                System.out.print("Enter employee's hometown: ");
                 String homeTown = sc.nextLine();
-                System.out.println("Enter employee's salary: ");
-                int salary = sc.nextInt();sc.nextLine();
+                System.out.print("Enter employee's salary: ");
+                int salary = sc.nextInt();
+                sc.nextLine();
+
                 Employee employee = new Employee(id, name, homeTown, salary);
-                list.add(employee);
+                listEmployee.add(employee);
+                System.out.println("Employee " + (i + 1) + " added successfully!");
             }
-        }   catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Error adding employee: " + e.getMessage());
-            sc.nextLine(); // consume invalid input
+            sc.nextLine();
         }
     }
 
-    public void updateEmp(){
+    public void editEmployeeById() { // chỉnh sửa thông tin nhân viên
+        try {
+            System.out.print("Enter employee's ID to edit: "); // nhập ID nhân viên cần chỉnh sửa
+            int id = sc.nextInt();
+            sc.nextLine();
+            Employee employee = findEmployeeById(id);
+            if (employee != null) {
+                System.out.println("==================================");
+                System.out.println("|   Choose information to edit   |");
+                System.out.println("==================================");
+                System.out.println("| 1. Update new name             |");
+                System.out.println("| 2. Update new homeTown         |");
+                System.out.println("| 3. Update new salary           |");
+                System.out.println("| 4. Update all                  |");
+                System.out.println("==================================");
+                int choice = sc.nextInt();
+                sc.nextLine();
+                switch (choice){
+                    case 1:
+                        System.out.print("Enter new name: ");
+                        String name = sc.nextLine();
+                        employee.setName(name);
+                        System.out.println("Name updated successfully!");
+                        break;
+                    case 2:
+                        System.out.print("Enter new hometown: ");
+                        String homeTown = sc.nextLine();
+                        employee.setHomeTown(homeTown);
+                        System.out.println("Hometown updated successfully!");
+                        break;
+                    case 3:
+                        System.out.print("Enter new salary: ");
+                        int salary = sc.nextInt();
+                        employee.setSalary(salary);
+                        System.out.println("Salary updated successfully!");
+                        break;
+                    case 4:
+                        System.out.print("Enter new name: ");
+                        name = sc.nextLine();
+                        employee.setName(name);
+                        System.out.print("Enter new hometown: ");
+                        homeTown = sc.nextLine();
+                        employee.setHomeTown(homeTown);
+                        System.out.print("Enter new salary: ");
+                        salary = sc.nextInt();
+                        employee.setSalary(salary);
+                        System.out.println("All information updated successfully!");
+                        break;
+                    default:
+                        System.out.println("Invalid choice!");
+                }
+            } else {
+                System.out.println("Employee not found!");
+            }
+        } catch (Exception e) {
+            System.out.println("Error editing employee: " + e.getMessage());
+            sc.nextLine();
+        }
+    }
 
+    private Employee findEmployeeById(int id) {
+        for (Employee emp : listEmployee) {
+            if (emp.getId() == id) {
+                return emp;
+            }
+        }
+        return null;
     }
 }

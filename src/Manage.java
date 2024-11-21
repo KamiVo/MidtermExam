@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Manage {
-    private List<Employee> listEmployee = new ArrayList<>();
-    private Scanner sc = new Scanner(System.in);
+    List<Employee> listEmployee = new ArrayList<>();
+    Scanner sc = new Scanner(System.in);
 
     public void showAllEmployees() {
         if (listEmployee.isEmpty()) {
@@ -53,11 +53,18 @@ public class Manage {
 
     public void editEmployeeById() { // chỉnh sửa thông tin nhân viên
         try {
+            Employee employee = new Employee();
             System.out.print("Enter employee's ID to edit: "); // nhập ID nhân viên cần chỉnh sửa
             int id = sc.nextInt();
             sc.nextLine();
-            Employee employee = findEmployeeById(id);
-            if (employee != null) {
+            boolean isExisted = false;
+            for(Employee emp : listEmployee) {
+                if(emp.getId() == id) {
+                    isExisted = true;
+                    break;
+                }
+            }
+            if (isExisted != false) {
                 System.out.println("==================================");
                 System.out.println("|   Choose information to edit   |");
                 System.out.println("==================================");
@@ -109,14 +116,5 @@ public class Manage {
             System.out.println("Error editing employee: " + e.getMessage());
             sc.nextLine();
         }
-    }
-
-    private Employee findEmployeeById(int id) {
-        for (Employee emp : listEmployee) {
-            if (emp.getId() == id) {
-                return emp;
-            }
-        }
-        return null;
     }
 }

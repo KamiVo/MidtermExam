@@ -53,64 +53,63 @@ public class Manage {
 
     public void editEmployeeById() { // chỉnh sửa thông tin nhân viên
         try {
-            Employee employee = new Employee();
             System.out.print("Enter employee's ID to edit: "); // nhập ID nhân viên cần chỉnh sửa
             int id = sc.nextInt();
             sc.nextLine();
-            boolean isExisted = false;
-            for(Employee emp : listEmployee) {
-                if(emp.getId() == id) {
-                    isExisted = true;
+            Employee employee = null;
+            for (Employee emp : listEmployee) {
+                if (emp.getId() == id) {
+                    employee = emp;
                     break;
                 }
             }
-            if (isExisted != false) {
-                System.out.println("==================================");
-                System.out.println("|   Choose information to edit   |");
-                System.out.println("==================================");
-                System.out.println("| 1. Update new name             |");
-                System.out.println("| 2. Update new homeTown         |");
-                System.out.println("| 3. Update new salary           |");
-                System.out.println("| 4. Update all                  |");
-                System.out.println("==================================");
-                int choice = sc.nextInt();
-                sc.nextLine();
-                switch (choice){
-                    case 1:
-                        System.out.print("Enter new name: ");
-                        String name = sc.nextLine();
-                        employee.setName(name);
-                        System.out.println("Name updated successfully!");
-                        break;
-                    case 2:
-                        System.out.print("Enter new hometown: ");
-                        String homeTown = sc.nextLine();
-                        employee.setHomeTown(homeTown);
-                        System.out.println("Hometown updated successfully!");
-                        break;
-                    case 3:
-                        System.out.print("Enter new salary: ");
-                        int salary = sc.nextInt();
-                        employee.setSalary(salary);
-                        System.out.println("Salary updated successfully!");
-                        break;
-                    case 4:
-                        System.out.print("Enter new name: ");
-                        name = sc.nextLine();
-                        employee.setName(name);
-                        System.out.print("Enter new hometown: ");
-                        homeTown = sc.nextLine();
-                        employee.setHomeTown(homeTown);
-                        System.out.print("Enter new salary: ");
-                        salary = sc.nextInt();
-                        employee.setSalary(salary);
-                        System.out.println("All information updated successfully!");
-                        break;
-                    default:
-                        System.out.println("Invalid choice!");
-                }
-            } else {
+            if (employee == null) {
                 System.out.println("Employee not found!");
+                return;
+            }
+            System.out.println("==================================");
+            System.out.println("|   Choose information to edit   |");
+            System.out.println("==================================");
+            System.out.println("| 1. Update new name             |");
+            System.out.println("| 2. Update new homeTown         |");
+            System.out.println("| 3. Update new salary           |");
+            System.out.println("| 4. Update all                  |");
+            System.out.println("==================================");
+            int choice = sc.nextInt();
+            sc.nextLine();
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter new name: ");
+                    String name = sc.nextLine();
+                    employee.setName(name);
+                    System.out.println("Name updated successfully!");
+                    break;
+                case 2:
+                    System.out.print("Enter new hometown: ");
+                    String homeTown = sc.nextLine();
+                    employee.setHomeTown(homeTown);
+                    System.out.println("Hometown updated successfully!");
+                    break;
+                case 3:
+                    System.out.print("Enter new salary: ");
+                    int salary = sc.nextInt();
+                    employee.setSalary(salary);
+                    System.out.println("Salary updated successfully!");
+                    break;
+                case 4:
+                    System.out.print("Enter new name: ");
+                    name = sc.nextLine();
+                    employee.setName(name);
+                    System.out.print("Enter new hometown: ");
+                    homeTown = sc.nextLine();
+                    employee.setHomeTown(homeTown);
+                    System.out.print("Enter new salary: ");
+                    salary = sc.nextInt();
+                    employee.setSalary(salary);
+                    System.out.println("All information updated successfully!");
+                    break;
+                default:
+                    System.out.println("Invalid choice!");
             }
         } catch (Exception e) {
             System.out.println("Error editing employee: " + e.getMessage());

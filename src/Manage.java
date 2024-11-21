@@ -58,12 +58,12 @@ public class Manage {
             sc.nextLine();
             Employee employee = null;
             for (Employee emp : listEmployee) {
-                if (emp.getId() == id) {
+                if (emp.getId() == id) { // nếu ID của nhân viên trong danh sách trùng với ID nhập vào
                     employee = emp;
                     break;
                 }
             }
-            if (employee == null) {
+            if (employee == null) { // nếu không tìm thấy nhân viên
                 System.out.println("Employee not found!");
                 return;
             }
@@ -77,26 +77,26 @@ public class Manage {
             System.out.println("==================================");
             int choice = sc.nextInt();
             sc.nextLine();
-            switch (choice) {
-                case 1:
+            switch (choice) { // chọn thông tin cần chỉnh sửa
+                case 1: // cập nhật tên
                     System.out.print("Enter new name: ");
                     String name = sc.nextLine();
                     employee.setName(name);
                     System.out.println("Name updated successfully!");
                     break;
-                case 2:
+                case 2: // cập nhật quê quán
                     System.out.print("Enter new hometown: ");
                     String homeTown = sc.nextLine();
                     employee.setHomeTown(homeTown);
                     System.out.println("Hometown updated successfully!");
                     break;
-                case 3:
+                case 3: // cập nhật lương
                     System.out.print("Enter new salary: ");
                     int salary = sc.nextInt();
                     employee.setSalary(salary);
                     System.out.println("Salary updated successfully!");
                     break;
-                case 4:
+                case 4: // cập nhật tất cả thông tin
                     System.out.print("Enter new name: ");
                     name = sc.nextLine();
                     employee.setName(name);
